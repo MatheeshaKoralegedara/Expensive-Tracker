@@ -2,6 +2,7 @@ package com.example.ExpensiveTracker.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.time.LocalDate;
 
 
 @Entity
@@ -17,6 +18,6 @@ public class Expense {
     private String title;
     private double amount;
     private String category;
-    private String date;
-    
+    private LocalDate date;
+
 }
