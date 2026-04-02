@@ -34,4 +34,14 @@ public class ExpenseController {
     public Expense updateExpense(@PathVariable Long id,@RequestBody Expense expense){
         return expenseService.updateExpense(id, expense);
     }
+
+    @GetMapping("/category/{category}")
+    public List<Expense> getExpensesByCategory (@PathVariable String category){
+        return expenseService.getExpensesByCategory(category);
+    }
+
+    @GetMapping("/weekly-summary")
+    public double getWeeklySummary(){
+        return expenseService.getWeeklySummary();
+    }
 }

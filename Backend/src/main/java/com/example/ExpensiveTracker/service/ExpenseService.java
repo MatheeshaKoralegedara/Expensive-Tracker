@@ -5,6 +5,7 @@ import com.example.ExpensiveTracker.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.time.LocalDate;
 
 @Service
 public class ExpenseService {
@@ -38,5 +39,26 @@ public class ExpenseService {
     
     return expenseRepository.save(existingExpense);
 }
+
+    public List<Expense> getExpensesByCategory (String category){
+        return expenseRepository.findByCategory(category);
+    }
+
+    public double getWeeklySummary() {
+
+        LocalDate today = LocalDate.now();
+        LocalDate lastWeek = today.minusDays(7);
+
+        List<Expense> expenses = expenseRepository.findByDateBetween(lastWeek, today);
+
+        double total = 0;
+
+        for (Expense e : expenses) {
+            total += e.getAmount();
+        }
+        return total;
+    }
+
+
     
 }
