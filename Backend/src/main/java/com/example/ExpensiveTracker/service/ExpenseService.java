@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.time.LocalDate;
+import java.util.*;
 
 @Service
 public class ExpenseService {
@@ -58,6 +59,54 @@ public class ExpenseService {
         }
         return total;
     }
+
+    public double getTotalExpenses() {
+        List<Expense> expenses = expenseRepository.findAll();
+
+        double total = 0;
+
+        for (Expense e : expenses){
+            total += e.getAmount();
+        }
+        return total;
+    }
+
+    public Map<String, Double> getExpensesByCategorySummary() {
+
+        List<Expense> expenses = expenseRepository.findAll();
+        Map<String, Double> summary = new HashMap<>();
+
+        for (Expense e : expenses) {
+            String category = e.getCategory();
+            double amount = e.getAmount();
+
+            summary.put(category, summary.getOrDefault(category, 0.0) + amount);
+        }
+        return summary;
+
+    }
+
+    public Map<LocalDate, Double> getWeeklyTrend(){
+
+        Map<LocalDate, Double> trend = new LinkedHashMap<>();
+
+        LocalDate today = LocalDate.now();
+
+        for(int i = 6; i>=0; i--){
+            LocalDate date = today.minusDays(i);
+
+            double total = expenseRepository.findAll().stream()
+                    .filter(e -> e.getDate().equals(date))
+                    .mapToDouble(Expense::getAmount)
+                    .sum();
+            trend.put(date,total);        
+
+        }
+
+        return trend;
+    }
+
+
 
 
     

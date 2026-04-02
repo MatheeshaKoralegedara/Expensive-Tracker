@@ -5,6 +5,8 @@ import com.example.ExpensiveTracker.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/expenses")
@@ -44,4 +46,21 @@ public class ExpenseController {
     public double getWeeklySummary(){
         return expenseService.getWeeklySummary();
     }
+
+    @GetMapping("/total")
+    public double getTotalExpenses(){
+        return expenseService.getTotalExpenses();
+    }
+
+    @GetMapping("/category-summary")
+    public Map<String, Double> getCategorySummary(){
+        return expenseService.getExpensesByCategorySummary();
+    }
+
+    @GetMapping("/weekly-trend")
+    public Map<LocalDate, Double> getWeeklyTrend(){
+        return expenseService.getWeeklyTrend();
+    }
+
+
 }
