@@ -51,7 +51,14 @@ function ExpenseForm({onAdd, selectedExpense}) {
             <form onSubmit={handleSubmit}>
                 <input placeholder="Title" value={title} onChange={e => setTitle(e.target.value)} required />
                 <input placeholder="Amount" type="number" value={amount} onChange={e => setAmount(e.target.value)} required />
-                <input placeholder="Category" value={category} onChange={e => setCategory(e.target.value)} required />
+                <select onChange={(e) => setCategory(e.target.value)}>
+                    <option value="">Select Category</option>
+                    <option value="Food">Food</option>
+                    <option value="Transportation">Transportation</option>
+                    <option value="Bills">Bills</option>
+                    <option value="Other">Other</option>
+
+                </select>
                 <input placeholder="Date" type="date" value={date} onChange={e => setDate(e.target.value)} required />
                 <button type="submit">Add Expense</button>
             </form>
