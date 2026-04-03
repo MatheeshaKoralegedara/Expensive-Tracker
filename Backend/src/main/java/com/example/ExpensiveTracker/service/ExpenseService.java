@@ -45,6 +45,10 @@ public class ExpenseService {
         return expenseRepository.findByCategory(category);
     }
 
+    public List<Expense> getExpensesByDateRange(LocalDate start, LocalDate end){
+        return expenseRepository.findByDateBetween(start, end);
+    }
+
     public double getWeeklySummary() {
 
         LocalDate today = LocalDate.now();

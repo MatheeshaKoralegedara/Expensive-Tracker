@@ -64,5 +64,17 @@ public class ExpenseController {
         return expenseService.getWeeklyTrend();
     }
 
+    @GetMapping("/filter")
+    public List<Expense> filterByDate(
+            @RequestParam String start,
+            @RequestParam String end) {
+        LocalDate startDate = LocalDate.parse(start);
+        LocalDate endDate = LocalDate.parse(end);
+                
+        return expenseService.getExpensesByDateRange(startDate, endDate);
+                
+            }
+    
+
 
 }
