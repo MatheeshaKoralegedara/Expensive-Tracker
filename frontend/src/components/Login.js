@@ -23,17 +23,19 @@ function Login() {
     };
 
     return (
-        <div> 
-            <h2>Login</h2>
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-300 to-red-300"> 
+            <div className="bg-white p-6 rounded-3xl shadow-md mb-6">
+                <h2 className="text-xl font-semibold mb-2 text-center">Login</h2>
+                </div>
 
-            <form onSubmit={handleLogin}>
-                <input placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} required />
-                <input placeholder="Password" type="password" value={password} onChange={e => setPassword(e.target.value)} required />
-                <button type="submit">Login</button>
+            <form onSubmit={handleLogin} className="space-y-4 w-full max-w-sm bg-white p-6 rounded-3xl shadow-md">
+                <input className="w-full p-2 border rounded-2xl focus:ring-2 focus:ring-blue-500" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} required />
+                <input className="w-full p-2 border rounded-2xl focus:ring-2 focus:ring-blue-500" placeholder="Password" type="password" value={password} onChange={e => setPassword(e.target.value)} required />
+                <button type="submit" className="w-full bg-blue-400 text-white p-2 rounded-2xl hover:bg-blue-600">Login</button>
             </form> 
 
-            <p>
-                Don't have an account? <a href="/register">Register here</a>
+            <p className="text-sm text-center mt-4 text-white">
+                Don't have an account? <a href="/register" className="text-blue-500 hover:underline">Register here</a>
             </p>
         </div>
     );

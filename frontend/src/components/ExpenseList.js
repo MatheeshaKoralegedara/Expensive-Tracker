@@ -56,55 +56,56 @@ function ExpenseList({ onEdit }) {
     };
 
     return (
-        <div>
-            <h2>All Expenses</h2>
+        <div className="bg-white p-6 rounded-2xl shadow-md">
+            <h2 className="text-xl font-semibold mb-4">All Expenses</h2>
 
-            <h3>Filters</h3>
+            <h3 className="font-semibold mb-2">Filters</h3>
 
             {/* Category */}
-            <input
+            <input className="w-full p-2 border rounded-2xl mb-4"
                 placeholder="Category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
             />
-            <button onClick={filterByCategory}>Filter by Category</button>
+            <button className="w-full bg-blue-400 text-white p-2 rounded-2xl hover:bg-blue-600 " onClick={filterByCategory}>Filter by Category</button>
 
             {/* Date */}
             <br /><br />
-            <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-            <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-            <button onClick={filterByDateRange}>Filter by Date</button>
+            <input className="w-full p-2 border rounded-2xl mb-4" type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+            <input  className="w-full p-2 border rounded-2xl mb-4" type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+            <button className="w-full bg-blue-400 text-white p-2 rounded-2xl hover:bg-blue-600" onClick={filterByDateRange}>Filter by Date</button>
             {expenses.length === 0 && <p>No expenses found for selected filters.</p>}
 
             {/* Reset */}
             <br /><br />
-            <button onClick={resetFilters}>Reset</button>
+            <button className="w-full bg-gray-400 text-white p-2 rounded-2xl hover:bg-gray-600 mb-6" onClick={resetFilters}>Reset</button>
 
-            <table border="1" cellPadding="5">
+            <table className="w-full border-collapse" border="1" cellPadding="5">
                 <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Amount</th>
-                        <th>Category</th>
-                        <th>Date</th>
-                        <th>Actions</th>
+                    <tr className="bg-gray-200">
+                        <th className="p-2">Title</th>
+                        <th className="p-2">Amount</th>
+                        <th className="p-2">Category</th>
+                        <th className="p-2">Date</th>
+                        <th className="p-2">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {expenses.map(exp => (
-                        <tr key={exp.id}>
-                            <td>{exp.title}</td>
-                            <td>Rs. {exp.amount}</td>
-                            <td>{exp.category}</td>
-                            <td>{exp.date}</td>
-                            <td>
-                                <button onClick={() => onEdit(exp)}>Edit</button>
-                                <button onClick={() => deleteExpense(exp.id)}>Delete</button>
+                        <tr key={exp.id} className="border-t text-center">
+                            <td className="p-2">{exp.title}</td>
+                            <td className="p-2 text-green-500">Rs. {exp.amount}</td>
+                            <td className="p-2">{exp.category}</td>
+                            <td className="p-2">{exp.date}</td>
+                            <td className="p-2 space-x-2">
+                                <button className="bg-blue-400 text-white p-2 rounded-2xl hover:bg-blue-600" onClick={() => onEdit(exp)}>Edit</button>
+                                <button className="bg-red-400 text-white p-2 rounded-2xl hover:bg-red-600" onClick={() => deleteExpense(exp.id)}>Delete</button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            
         </div>
     );
 }

@@ -20,11 +20,16 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={
-          <div>
-            <h1>Expense Tracker Dashboard</h1>
+          <div className="min-h-screen bg-gray-100 p-6">
+            <h1 className="text-3xl font-bold mb-6 text-center">Expense Tracker Dashboard</h1>
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <ExpenseForm onAdd={handleRefresh} selectedExpense={selectedExpense} />
+          <Dashboard/>
+          </div>
+
+          <div className="mt-6">
             <ExpenseList key={refresh} onEdit={handleEdit} />
-            <Dashboard/>
+          </div>
           </div>
         } />
       </Routes>

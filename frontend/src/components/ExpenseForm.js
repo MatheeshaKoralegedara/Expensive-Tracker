@@ -46,12 +46,12 @@ function ExpenseForm({onAdd, selectedExpense}) {
     }, [selectedExpense]);
 
     return (
-        <div>
-            <h2>Add Expense</h2>
-            <form onSubmit={handleSubmit}>
-                <input placeholder="Title" value={title} onChange={e => setTitle(e.target.value)} required />
-                <input placeholder="Amount" type="number" value={amount} onChange={e => setAmount(e.target.value)} required />
-                <select onChange={(e) => setCategory(e.target.value)}>
+        <div className="bg-white p-6 rounded-3xl shadow-md">
+            <h2 className="text-xl font-semibold mb-4">Add Expense</h2>
+            <form onSubmit={handleSubmit} className="space-y-3">
+                <input className="w-full p-2 border rounded-2xl" placeholder="Title" value={title} onChange={e => setTitle(e.target.value)} required />
+                <input  className="w-full p-2 border rounded-2xl"placeholder="Amount" type="number" value={amount} onChange={e => setAmount(e.target.value)} required />
+                <select  className="w-full p-2 border rounded-2xl"onChange={(e) => setCategory(e.target.value)}>
                     <option value="">Select Category</option>
                     <option value="Food">Food</option>
                     <option value="Transportation">Transportation</option>
@@ -59,8 +59,8 @@ function ExpenseForm({onAdd, selectedExpense}) {
                     <option value="Other">Other</option>
 
                 </select>
-                <input placeholder="Date" type="date" value={date} onChange={e => setDate(e.target.value)} required />
-                <button type="submit">Add Expense</button>
+                <input className="w-full p-2 border rounded-2xl" placeholder="Date" type="date" value={date} onChange={e => setDate(e.target.value)} required />
+                <button className="w-full bg-blue-400 text-white p-2 rounded-2xl hover:bg-blue-600" type="submit">Save</button>
             </form>
         </div>
     );

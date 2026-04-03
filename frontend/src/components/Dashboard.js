@@ -15,12 +15,15 @@ function Dashboard() {
     useEffect(() => {
         axios.get("http://localhost:8080/api/expenses/total")
             .then(res => setTotal(res.data))
+            .catch(err => console.error("Error fetching total:", err));
             
         axios.get("http://localhost:8080/api/expenses/category-summary")
-            .then(res => setCategoryData(res.data));
+            .then(res => setCategoryData(res.data))
+            .catch(err => console.error("Error fetching categories:", err));
 
         axios.get("http://localhost:8080/api/expenses/weekly-trend")
-            .then(res => setWeeklyTrend(res.data));    
+            .then(res => setWeeklyTrend(res.data))
+            .catch(err => console.error("Error fetching trends:", err));    
     },[]);
 
     const navigate = useNavigate();
@@ -60,15 +63,18 @@ function Dashboard() {
     };
     
     return (
-        <div>
-            <button onClick={logout}>Logout</button>
-            <h2>Total Expenses: Rs. {total}</h2>
-            <h3>Category Breakdown</h3>
+        <div className="bg-gray-100 p-6 rounded-3xl shadow-md">
+            <button className="w-full bg-red-500 text-white p-2 rounded-2xl hover:bg-yellow-500" onClick={logout}>Logout</button>
+            <h2 className="text-3xl font-semibold mb-4">Total Expenses </h2>
+            <p className="text-2xl font-bold mb-6">Rs.{total.toFixed(2)}</p>
+            
+            <div className="bg-white p-6 rounded-2xl shadow-md mt-4">
+            <h3 className="font-semibold mb-2">Category Breakdown</h3>
             <Pie data={pieData} />
 
-            <h3>Weekly Trend</h3>
+            <h3 className="font-semibold mb-2">Weekly Trend</h3>
             <Line data={lineData}/>
-
+            </div>
         </div>
     );
 }
