@@ -19,5 +19,8 @@ public class Expense {
     private double amount;
     private String category;
     private LocalDate date;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
