@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Pie, Line } from "react-chartjs-2";
 import {Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement} from "chart.js";
+import { useNavigate } from "react-router-dom";
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement);
 
@@ -22,6 +23,20 @@ function Dashboard() {
             .then(res => setWeeklyTrend(res.data));    
     },[]);
 
+    const navigate = useNavigate();
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            navigate("/");
+        }   
+    }, []);
+
+    const logout = () => { 
+        localStorage.removeItem("token");
+        window.location.href = "/";
+    }; 
+
     const pieData = {
         labels: Object.keys(categoryData),
         datasets: [{
@@ -30,6 +45,8 @@ function Dashboard() {
 
         }]
     };
+
+
 
     const lineData = {
         labels:Object.keys(weeklyTrend),
@@ -44,6 +61,7 @@ function Dashboard() {
     
     return (
         <div>
+            <button onClick={logout}>Logout</button>
             <h2>Total Expenses: Rs. {total}</h2>
             <h3>Category Breakdown</h3>
             <Pie data={pieData} />
