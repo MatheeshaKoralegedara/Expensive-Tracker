@@ -1,7 +1,7 @@
 import React, { use, useEffect, useState } from "react";
 import axios from "axios";
 
-function ExpenseList() {
+function ExpenseList({onEdit}) {
 
     const [expenses, setExpenses] = useState([]);
 
@@ -43,6 +43,7 @@ function ExpenseList() {
                             <td>Rs. {exp.amount}</td>
                             <td>{exp.category}</td>
                             <td>{new Date(exp.date).toLocaleDateString()}</td>
+                            <td><button onClick={()=> onEdit(exp)}>Edit</button></td>
                             <td><button onClick={() => deleteExpense(exp.id)}>Delete</button></td>
                         </tr>
                     ))}
