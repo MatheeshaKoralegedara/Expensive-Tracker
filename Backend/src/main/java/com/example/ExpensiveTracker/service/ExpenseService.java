@@ -8,28 +8,44 @@ import java.util.List;
 import java.time.LocalDate;
 import java.util.*;
 
+import com.example.ExpensiveTracker.model.User;
+import com.example.ExpensiveTracker.repository.UserRepository;
+
 @Service
 public class ExpenseService {
 
     @Autowired
     private ExpenseRepository expenseRepository;
 
-    public Expense saveExpense(Expense expense){
+    @Autowired
+    private UserRepository userRepository;
+
+    public Expense saveExpense(Expense expense, Long userId){
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        expense.setUser(user);
         return expenseRepository.save(expense);
     }
 
-    public List<Expense> getAllExpenses(){
-        return expenseRepository.findAll();
+    public List<Expense> getAllExpenses(Long userId){
+        return expenseRepository.findByUserId(userId);
     }
 
-    public void deleteExpense(Long id) {
+    public void deleteExpense(Long id, Long userId) {
+        Expense expense = expenseRepository.findById(id).orElseThrow(() -> new RuntimeException("Expense not found"));
+        if (!expense.getUser().getId().equals(userId)) {
+            throw new RuntimeException("Unauthorized");
+        }
         expenseRepository.deleteById(id);
     }
 
-    public Expense updateExpense(Long id, Expense newExpense) {
+    public Expense updateExpense(Long id, Expense newExpense, Long userId) {
     
     Expense existingExpense = expenseRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Expense not found"));
+
+    if (!existingExpense.getUser().getId().equals(userId)) {
+        throw new RuntimeException("Unauthorized");
+    }
 
   
     existingExpense.setTitle(newExpense.getTitle());
@@ -41,20 +57,20 @@ public class ExpenseService {
     return expenseRepository.save(existingExpense);
 }
 
-    public List<Expense> getExpensesByCategory (String category){
-        return expenseRepository.findByCategory(category);
+    public List<Expense> getExpensesByCategory (String category, Long userId){
+        return expenseRepository.findByUserIdAndCategory(userId, category);
     }
 
-    public List<Expense> getExpensesByDateRange(LocalDate start, LocalDate end){
-        return expenseRepository.findByDateBetween(start, end);
+    public List<Expense> getExpensesByDateRange(LocalDate start, LocalDate end, Long userId){
+        return expenseRepository.findByUserIdAndDateBetween(userId, start, end);
     }
 
-    public double getWeeklySummary() {
+    public double getWeeklySummary(Long userId) {
 
         LocalDate today = LocalDate.now();
         LocalDate lastWeek = today.minusDays(7);
 
-        List<Expense> expenses = expenseRepository.findByDateBetween(lastWeek, today);
+        List<Expense> expenses = expenseRepository.findByUserIdAndDateBetween(userId, lastWeek, today);
 
         double total = 0;
 
@@ -64,8 +80,8 @@ public class ExpenseService {
         return total;
     }
 
-    public double getTotalExpenses() {
-        List<Expense> expenses = expenseRepository.findAll();
+    public double getTotalExpenses(Long userId) {
+        List<Expense> expenses = expenseRepository.findByUserId(userId);
 
         double total = 0;
 
@@ -75,9 +91,9 @@ public class ExpenseService {
         return total;
     }
 
-    public Map<String, Double> getExpensesByCategorySummary() {
+    public Map<String, Double> getExpensesByCategorySummary(Long userId) {
 
-        List<Expense> expenses = expenseRepository.findAll();
+        List<Expense> expenses = expenseRepository.findByUserId(userId);
         Map<String, Double> summary = new HashMap<>();
 
         for (Expense e : expenses) {
@@ -90,7 +106,7 @@ public class ExpenseService {
 
     }
 
-    public Map<LocalDate, Double> getWeeklyTrend(){
+    public Map<LocalDate, Double> getWeeklyTrend(Long userId){
 
         Map<LocalDate, Double> trend = new LinkedHashMap<>();
 
@@ -99,7 +115,7 @@ public class ExpenseService {
         for(int i = 6; i>=0; i--){
             LocalDate date = today.minusDays(i);
 
-            double total = expenseRepository.findAll().stream()
+            double total = expenseRepository.findByUserId(userId).stream()
                     .filter(e -> e.getDate().equals(date))
                     .mapToDouble(Expense::getAmount)
                     .sum();
