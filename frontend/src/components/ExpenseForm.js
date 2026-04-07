@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api";
 
 function ExpenseForm({onAdd, selectedExpense}) {
     const [title, setTitle] = useState("");
@@ -13,7 +13,7 @@ function ExpenseForm({onAdd, selectedExpense}) {
 
         if(selectedExpense){
             // UPDATE
-            axios.put(`http://localhost:8080/api/expenses/${selectedExpense.id}`, expenseData)
+            api.put(`/expenses/${selectedExpense.id}`, expenseData)
                 .then(() => {
                     onAdd();
                     setTitle("");
@@ -24,7 +24,7 @@ function ExpenseForm({onAdd, selectedExpense}) {
                 .catch(err => console.error(err));
         } else {
             //ADD
-            axios.post("http://localhost:8080/api/expenses", expenseData)
+            api.post("/expenses", expenseData)
                 .then(() => {
                     onAdd();
                     setTitle("");
