@@ -17,17 +17,12 @@ public class ExpenseController {
     @Autowired
     private ExpenseService expenseService;
 
-   private Long getUserIdForRequest(String authHeader) {
-    if (authHeader == null) {
-        return 1L; // fallback user
-    }
-
-    if (authHeader.startsWith("Bearer dummy-token-")) {
+    private Long getUserIdForRequest(String authHeader) {
+        if (authHeader == null || !authHeader.startsWith("Bearer dummy-token-")) {
+            throw new RuntimeException("Unauthorized");
+        }
         return Long.parseLong(authHeader.replace("Bearer dummy-token-", ""));
     }
-
-    throw new RuntimeException("Unauthorized");
-}
 
     @PostMapping
     public Expense addExpense(@RequestBody Expense expense, @RequestHeader(value = "Authorization", required = false) String authHeader){
