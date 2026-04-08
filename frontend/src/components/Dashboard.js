@@ -65,7 +65,7 @@ function Dashboard() {
     
     return (
         <div className="bg-gray-100 p-6 rounded-3xl shadow-md">
-            <button className="w-full bg-red-500 text-white p-2 rounded-2xl hover:bg-yellow-500" onClick={logout}>Logout</button>
+            <button className="w-full bg-red-500 text-white p-2 rounded-2xl hover:bg-yellow-500 w-40 " onClick={logout}>Logout</button>
             <h2 className="text-3xl font-semibold mb-4">Total Expenses </h2>
             <p className="text-2xl font-bold mb-6">Rs.{total.toFixed(2)}</p>
             

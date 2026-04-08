@@ -21,7 +21,7 @@ function Register() {
 
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-300 to-red-300">
-               <div className="bg-white p-4 rounded-2xl shadow-lg w-60" > 
+               <div className="bg-white p-4 rounded-2xl shadow-lg w-40" > 
                 <h2 className="text-3xl font-bold mb-2 text-center">Register</h2>
                 </div>
                 <form onSubmit={handleRegister} className="space-y-4 w-full max-w-sm bg-white p-6 rounded-3xl shadow-md mt-6">
