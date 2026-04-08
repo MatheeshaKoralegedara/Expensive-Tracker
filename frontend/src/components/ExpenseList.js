@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api";
 
 function ExpenseList({ onEdit }) {
 
@@ -13,13 +13,13 @@ function ExpenseList({ onEdit }) {
     }, []);
 
     const fetchExpenses = () => {
-        axios.get("http://localhost:8080/api/expenses")
+        api.get("/expenses")
             .then(res => setExpenses(res.data))
             .catch(err => console.error(err));
     };
 
     const deleteExpense = (id) => {
-        axios.delete(`http://localhost:8080/api/expenses/${id}`)
+        api.delete(`/expenses/${id}`)
             .then(() => fetchExpenses())
             .catch(err => console.error(err));
     };
@@ -27,7 +27,7 @@ function ExpenseList({ onEdit }) {
     const filterByCategory = () => {
         if (category === "") return fetchExpenses();
 
-        axios.get(`http://localhost:8080/api/expenses/category/${category}`)
+        api.get(`/expenses/category/${category}`)
             .then(res => setExpenses(res.data))
             .catch(err => console.error(err));
     };
@@ -39,7 +39,7 @@ function ExpenseList({ onEdit }) {
        return ;
         }
 
-        axios.get(`http://localhost:8080/api/expenses/filter?start=${startDate}&end=${endDate}`)
+        api.get(`/expenses/filter?start=${startDate}&end=${endDate}`)
             .then(res => {
                 console.log("Filtered Date: ", res.date);
                 setExpenses(res.data);

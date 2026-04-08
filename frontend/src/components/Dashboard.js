@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import api from "../api";
 import { Pie, Line } from "react-chartjs-2";
 import {Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement} from "chart.js";
 import { useNavigate } from "react-router-dom";
@@ -13,15 +14,15 @@ function Dashboard() {
     const [weeklyTrend, setWeeklyTrend] = useState({});
 
     useEffect(() => {
-        axios.get("http://localhost:8080/api/expenses/total")
+        api.get("/expenses/total")
             .then(res => setTotal(res.data))
             .catch(err => console.error("Error fetching total:", err));
             
-        axios.get("http://localhost:8080/api/expenses/category-summary")
+        api.get("/expenses/category-summary")
             .then(res => setCategoryData(res.data))
             .catch(err => console.error("Error fetching categories:", err));
 
-        axios.get("http://localhost:8080/api/expenses/weekly-trend")
+        api.get("/expenses/weekly-trend")
             .then(res => setWeeklyTrend(res.data))
             .catch(err => console.error("Error fetching trends:", err));    
     },[]);
@@ -64,7 +65,7 @@ function Dashboard() {
     
     return (
         <div className="bg-gray-100 p-6 rounded-3xl shadow-md">
-            <button className="w-full bg-red-500 text-white p-2 rounded-2xl hover:bg-yellow-500" onClick={logout}>Logout</button>
+            <button className="w-full bg-red-500 text-white p-2 rounded-2xl hover:bg-yellow-500 w-40 " onClick={logout}>Logout</button>
             <h2 className="text-3xl font-semibold mb-4">Total Expenses </h2>
             <p className="text-2xl font-bold mb-6">Rs.{total.toFixed(2)}</p>
             
