@@ -60,7 +60,7 @@ function ExpenseForm({onAdd, selectedExpense}) {
 
                 </select>
                 <input className="w-full p-2 border rounded-2xl" placeholder="Date" type="date" value={date} onChange={e => setDate(e.target.value)} required />
-                <button className="w-full bg-blue-400 text-white p-2 rounded-2xl hover:bg-blue-600" type="submit">Save</button>
+                <button className="w-full bg-blue-500 text-white p-2 rounded-2xl hover:bg-blue-700" type="submit">Save</button>
             </form>
         </div>
     );

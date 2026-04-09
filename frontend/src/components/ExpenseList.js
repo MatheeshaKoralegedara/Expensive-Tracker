@@ -67,13 +67,13 @@ function ExpenseList({ onEdit }) {
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
             />
-            <button className="w-full bg-blue-400 text-white p-2 rounded-2xl hover:bg-blue-600 " onClick={filterByCategory}>Filter by Category</button>
+            <button className="w-full bg-blue-500 text-white p-2 rounded-2xl hover:bg-blue-700 " onClick={filterByCategory}>Filter by Category</button>
 
             {/* Date */}
             <br /><br />
             <input className="w-full p-2 border rounded-2xl mb-4" type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
             <input  className="w-full p-2 border rounded-2xl mb-4" type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-            <button className="w-full bg-blue-400 text-white p-2 rounded-2xl hover:bg-blue-600" onClick={filterByDateRange}>Filter by Date</button>
+            <button className="w-full bg-blue-500 text-white p-2 rounded-2xl hover:bg-blue-700" onClick={filterByDateRange}>Filter by Date</button>
             {expenses.length === 0 && <p>No expenses found for selected filters.</p>}
 
             {/* Reset */}
@@ -98,7 +98,7 @@ function ExpenseList({ onEdit }) {
                             <td className="p-2">{exp.category}</td>
                             <td className="p-2">{exp.date}</td>
                             <td className="p-2 space-x-2">
-                                <button className="bg-blue-400 text-white p-2 rounded-2xl hover:bg-blue-600" onClick={() => onEdit(exp)}>Edit</button>
+                                <button className="bg-blue-500 text-white p-2 rounded-2xl hover:bg-blue-700" onClick={() => onEdit(exp)}>Edit</button>
                                 <button className="bg-red-400 text-white p-2 rounded-2xl hover:bg-red-600" onClick={() => deleteExpense(exp.id)}>Delete</button>
                             </td>
                         </tr>

@@ -32,7 +32,7 @@ function Login() {
             <form onSubmit={handleLogin} className="space-y-4 w-full max-w-sm bg-white p-6 rounded-3xl shadow-md">
                 <input className="w-full p-2 border rounded-2xl focus:ring-2 focus:ring-blue-500" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} required />
                 <input className="w-full p-2 border rounded-2xl focus:ring-2 focus:ring-blue-500" placeholder="Password" type="password" value={password} onChange={e => setPassword(e.target.value)} required />
-                <button type="submit" className="w-full bg-blue-400 text-white p-2 rounded-2xl hover:bg-blue-600">Login</button>
+                <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-2xl hover:bg-blue-600">Login</button>
             </form> 
 
             <p className="text-sm text-center mt-4 text-white">
