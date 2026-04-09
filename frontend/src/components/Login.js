@@ -14,7 +14,8 @@ function Login() {
         axios.post("http://localhost:8080/api/auth/login", {username, password})
             .then(res => {
                 localStorage.setItem("token", res.data.token);
-                navigate("/dashboard");
+                localStorage.setItem("username", username);
+                navigate("/welcome");
             })
             .catch(err => {
                 alert("Login failed. Please check your credentials.");
