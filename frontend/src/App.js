@@ -7,6 +7,12 @@ import Dashboard from './components/Dashboard';
 import ExpenseList from './components/ExpenseList';
 import ExpenseForm from './components/ExpenseForm';
 import Welcome from './components/Welcome'; 
+import Sidebar from './components/Sidebar';
+import DashboardPage from "./pages/DashboardPage";
+import ExpensesPage from "./pages/ExpensesPage";
+import AddExpensePage from "./pages/AddExpensePage";
+import Goodbye from './components/Goodbye';
+
 
 function App() {
 
@@ -24,25 +30,37 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/welcome" element={<Welcome />} />
+      <Route path="/goodbye" element={<Goodbye />} />
 
-      <Route path="/dashboard" element={
-        <div className="min-h-screen bg-gray-100 p-6">
+  
+<Route path="/dashboard" element={
+  <div className="flex">
+    <Sidebar />
+    <div className="flex-1 p-6 bg-gray-100">
+      <DashboardPage />
+    </div>
+  </div>
+} />
 
-          <h1 className="text-3xl font-bold mb-6 text-center">
-            Expense Tracker Dashboard
-          </h1>
+<Route path="/expenses" element={
+  <div className="flex">
+    <Sidebar />
+    <div className="flex-1 p-6 bg-gray-100">
+      <ExpensesPage />
+    </div>
+  </div>
+} />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <ExpenseForm onAdd={handleRefresh} selectedExpense={selectedExpense} />
-            <Dashboard />
-          </div>
+<Route path="/add" element={
+  <div className="flex">
+    <Sidebar />
+    <div className="flex-1 p-6 bg-gray-100">
+      <AddExpensePage />
+    </div>
+  </div>
+} />
 
-          <div className="mt-6">
-            <ExpenseList key={refresh} onEdit={handleEdit} />
-          </div>
 
-        </div>
-      } />
 
     </Routes>
   );
