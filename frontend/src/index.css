@@ -1,17 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --bg: #191616;
+  --surface: #13131a;
+  --surface-2: #1c1c28;
+  --border: rgba(255,255,255,0.07);
+  --accent: #6c63ff;
+  --accent-2: #ff6b6b;
+  --accent-3: #43e97b;
+  --text: #cbcbd4;
+  --text-muted: #6a6a81;
+  --green: #43e97b;
+  --red: #ff6b6b;
+  --yellow: #ffd93d;
+  --blue: #4facfe;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
 }
+
+h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+.glass { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; }
+
+.input-field {
+  width: 100%; padding: 12px 16px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: 12px; color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 14px;
+  outline: none; transition: all 0.2s;
+}
+.input-field::placeholder { color: var(--text-muted); }
+.input-field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(108,99,255,0.15); }
+
+.btn-primary {
+  width: 100%; padding: 13px; background: var(--accent);
+  color: white; border: none; border-radius: 12px;
+  font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; letter-spacing: 0.02em;
+}
+.btn-primary:hover { background: #5a52d5; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(108,99,255,0.35); }
+.btn-primary:active { transform: translateY(0); }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+
+.fade-up { animation: fadeUp 0.5s ease forwards; }
+.fade-in { animation: fadeIn 0.4s ease forwards; }
+
+.skeleton {
+  background: linear-gradient(90deg, var(--surface-2) 25%, var(--surface) 50%, var(--surface-2) 75%);
+  background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px;
+}
+
+.stat-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+  padding: 24px; transition: transform 0.2s, box-shadow 0.2s;
+}
+.stat-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+
+.nav-item {
+  display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+  border-radius: 12px; cursor: pointer; transition: all 0.2s;
+  color: var(--text-muted); font-family: 'Syne', sans-serif; font-weight: 500; font-size: 14px;
+  border: none; background: transparent; width: 100%; text-align: left;
+}
+.nav-item:hover { background: var(--surface-2); color: var(--text); }
+.nav-item.active { background: rgba(108,99,255,0.15); color: var(--accent); border: 1px solid rgba(108,99,255,0.25); }
+
+.amount { color: var(--green); font-weight: 600; }
+.expense-row { transition: background 0.15s; }
+.expense-row:hover { background: rgba(28,28,40,0.8); }
+
+.badge { display:inline-block; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; }
+.badge-food { background:rgba(255,107,107,0.15); color:var(--red); }
+.badge-transportation { background:rgba(79,172,254,0.15); color:var(--blue); }
+.badge-bills { background:rgba(255,217,61,0.15); color:var(--yellow); }
+.badge-other { background:rgba(107,107,128,0.15); color:var(--text-muted); }
+.badge-entertainment { background:rgba(108,99,255,0.15); color:var(--accent); }
+.badge-health { background:rgba(67,233,123,0.15); color:var(--green); }
