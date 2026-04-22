@@ -12,16 +12,31 @@ function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    
+    if (!username.trim() || !password.trim()) {
+      setError('Please enter both username and password');
+      return;
+    }
+
     setLoading(true);
     setError('');
+    
     axios.post('http://localhost:8080/api/auth/login', { username, password })
       .then(res => {
         localStorage.setItem('token', res.data.token);
-        localStorage.setItem('username', username);
+        localStorage.setItem('userId', res.data.user.id);
+        localStorage.setItem('username', res.data.user.username);
+        localStorage.setItem('email', res.data.user.email);
+        localStorage.setItem('firstName', res.data.user.firstName);
+        localStorage.setItem('lastName', res.data.user.lastName);
         navigate('/welcome');
       })
-      .catch(() => {
-        setError('Invalid username or password. Please try again.');
+      .catch(error => {
+        if (error.response?.data?.message) {
+          setError(error.response.data.message);
+        } else {
+          setError('Invalid username or password. Please try again.');
+        }
         setLoading(false);
       });
   };
@@ -72,11 +87,30 @@ function Login() {
           <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div>
               <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Username</label>
-              <input className="input-field" placeholder="Enter your username" value={username} onChange={e => setUsername(e.target.value)} required />
+              <input 
+                className="input-field" 
+                placeholder="Enter your username" 
+                value={username} 
+                onChange={e => {
+                  setUsername(e.target.value);
+                  setError('');
+                }}
+                required 
+              />
             </div>
             <div>
               <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Password</label>
-              <input className="input-field" placeholder="Enter your password" type="password" value={password} onChange={e => setPassword(e.target.value)} required />
+              <input 
+                className="input-field" 
+                placeholder="Enter your password" 
+                type="password" 
+                value={password} 
+                onChange={e => {
+                  setPassword(e.target.value);
+                  setError('');
+                }}
+                required 
+              />
             </div>
 
             {error && (
@@ -85,7 +119,12 @@ function Login() {
               </div>
             )}
 
-            <button className="btn-primary" type="submit" disabled={loading} style={{ marginTop: 8, opacity: loading ? 0.7 : 1 }}>
+            <button 
+              className="btn-primary" 
+              type="submit" 
+              disabled={loading} 
+              style={{ marginTop: 8, opacity: loading ? 0.7 : 1 }}
+            >
               {loading ? 'Signing in...' : 'Sign in →'}
             </button>
           </form>

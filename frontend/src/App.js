@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 
 import Login from './components/Login';
 import Register from './components/Register';
+import VerifyEmail from './components/VerifyEmail';
 import Dashboard from './components/Dashboard';
 import ExpenseList from './components/ExpenseList';
 import ExpenseForm from './components/ExpenseForm';
@@ -29,6 +30,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/verify-email" element={<VerifyEmail />} />
       <Route path="/welcome" element={<Welcome />} />
       <Route path="/goodbye" element={<Goodbye />} />
 
