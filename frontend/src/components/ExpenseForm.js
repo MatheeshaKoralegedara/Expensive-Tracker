@@ -35,8 +35,13 @@ function ExpenseForm({ onAdd, selectedExpense, onCancel }) {
     req.then(() => {
       setSuccess(true);
       setTimeout(() => setSuccess(false), 2000);
-      if (!selectedExpense) { setTitle(''); setAmount(''); setCategory(''); setDate(new Date().toISOString().split('T')[0]); }
+      if (!selectedExpense) {
+        setTitle(''); setAmount(''); setCategory(''); setDate(new Date().toISOString().split('T')[0]);
+      }
       onAdd();
+      if (selectedExpense && onCancel) {
+        onCancel();
+      }
     }).catch(err => console.error(err)).finally(() => setLoading(false));
   };
 

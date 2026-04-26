@@ -9,7 +9,7 @@ function getBadgeClass(cat) {
   return map[cat] || 'badge-other';
 }
 
-function ExpenseList({ onEdit }) {
+function ExpenseList({ onEdit, refresh }) {
   const [expenses, setExpenses] = useState([]);
   const [category, setCategory] = useState('');
   const [startDate, setStartDate] = useState('');
@@ -23,7 +23,7 @@ function ExpenseList({ onEdit }) {
     api.get('/expenses').then(res => setExpenses(res.data)).catch(console.error).finally(() => setLoading(false));
   }, []);
 
-  useEffect(() => { fetchExpenses(); }, [fetchExpenses]);
+  useEffect(() => { fetchExpenses(); }, [fetchExpenses, refresh]);
 
   const deleteExpense = (id) => {
     setDeleteId(id);
