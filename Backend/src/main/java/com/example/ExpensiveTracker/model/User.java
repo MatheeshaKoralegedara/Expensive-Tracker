@@ -2,6 +2,7 @@ package com.example.ExpensiveTracker.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -39,9 +40,15 @@ public class User {
     @Column(name = "email_verification_token")
     private String emailVerificationToken;
 
+    @Column(name = "weekly_budget", nullable = false, precision = 10, scale = 2)
+    private BigDecimal weeklyBudget = BigDecimal.ZERO;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
+        if (weeklyBudget == null) {
+            weeklyBudget = BigDecimal.ZERO;
+        }
     }
 
 }
