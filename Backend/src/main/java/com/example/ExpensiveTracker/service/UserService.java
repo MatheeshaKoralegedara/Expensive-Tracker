@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.UUID;
+import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
 @Service
@@ -21,6 +22,21 @@ public class UserService {
     private EmailService emailService;
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId)
+            .orElseThrow(() -> new RegistrationException("User not found"));
+    }
+
+    public User updateWeeklyBudget(Long userId, BigDecimal weeklyBudget) {
+        if (weeklyBudget == null || weeklyBudget.compareTo(BigDecimal.ZERO) < 0) {
+            throw new RegistrationException("Weekly budget must be zero or greater");
+        }
+
+        User user = getUserById(userId);
+        user.setWeeklyBudget(weeklyBudget);
+        return userRepository.save(user);
+    }
 
     // Email validation pattern
     private static final String EMAIL_PATTERN = 

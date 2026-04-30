@@ -2,6 +2,7 @@ package com.example.ExpensiveTracker.controller;
 
 import com.example.ExpensiveTracker.model.Expense;
 import com.example.ExpensiveTracker.service.ExpenseService;
+import com.example.ExpensiveTracker.util.AuthTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -17,58 +18,51 @@ public class ExpenseController {
     @Autowired
     private ExpenseService expenseService;
 
-    private Long getUserIdForRequest(String authHeader) {
-        if (authHeader == null || !authHeader.startsWith("Bearer dummy-token-")) {
-            throw new RuntimeException("Unauthorized");
-        }
-        return Long.parseLong(authHeader.replace("Bearer dummy-token-", ""));
-    }
-
     @PostMapping
     public Expense addExpense(@RequestBody Expense expense, @RequestHeader(value = "Authorization", required = false) String authHeader){
-        return expenseService.saveExpense(expense, getUserIdForRequest(authHeader));
+        return expenseService.saveExpense(expense, AuthTokenUtil.getUserIdFromHeader(authHeader));
     }
     
     @GetMapping
     public List<Expense> getAllExpenses(@RequestHeader(value = "Authorization", required = false) String authHeader){
-        return expenseService.getAllExpenses(getUserIdForRequest(authHeader));
+        return expenseService.getAllExpenses(AuthTokenUtil.getUserIdFromHeader(authHeader));
 
     }
 
     @DeleteMapping("/{id}")
     public String deleteExpense(@PathVariable Long id, @RequestHeader(value = "Authorization", required = false) String authHeader){
-        expenseService.deleteExpense(id, getUserIdForRequest(authHeader));
+        expenseService.deleteExpense(id, AuthTokenUtil.getUserIdFromHeader(authHeader));
         return "Deleted Successfully";
     }
 
     @PutMapping("/{id}")
     public Expense updateExpense(@PathVariable Long id,@RequestBody Expense expense, @RequestHeader(value = "Authorization", required = false) String authHeader){
-        return expenseService.updateExpense(id, expense, getUserIdForRequest(authHeader));
+        return expenseService.updateExpense(id, expense, AuthTokenUtil.getUserIdFromHeader(authHeader));
     }
 
     @GetMapping("/category/{category}")
     public List<Expense> getExpensesByCategory (@PathVariable String category, @RequestHeader(value = "Authorization", required = false) String authHeader){
-        return expenseService.getExpensesByCategory(category, getUserIdForRequest(authHeader));
+        return expenseService.getExpensesByCategory(category, AuthTokenUtil.getUserIdFromHeader(authHeader));
     }
 
     @GetMapping("/weekly-summary")
     public double getWeeklySummary(@RequestHeader(value = "Authorization", required = false) String authHeader){
-        return expenseService.getWeeklySummary(getUserIdForRequest(authHeader));
+        return expenseService.getWeeklySummary(AuthTokenUtil.getUserIdFromHeader(authHeader));
     }
 
     @GetMapping("/total")
     public double getTotalExpenses(@RequestHeader(value = "Authorization", required = false) String authHeader){
-        return expenseService.getTotalExpenses(getUserIdForRequest(authHeader));
+        return expenseService.getTotalExpenses(AuthTokenUtil.getUserIdFromHeader(authHeader));
     }
 
     @GetMapping("/category-summary")
     public Map<String, Double> getCategorySummary(@RequestHeader(value = "Authorization", required = false) String authHeader){
-        return expenseService.getExpensesByCategorySummary(getUserIdForRequest(authHeader));
+        return expenseService.getExpensesByCategorySummary(AuthTokenUtil.getUserIdFromHeader(authHeader));
     }
 
     @GetMapping("/weekly-trend")
     public Map<LocalDate, Double> getWeeklyTrend(@RequestHeader(value = "Authorization", required = false) String authHeader){
-        return expenseService.getWeeklyTrend(getUserIdForRequest(authHeader));
+        return expenseService.getWeeklyTrend(AuthTokenUtil.getUserIdFromHeader(authHeader));
     }
 
     @GetMapping("/filter")
@@ -79,7 +73,7 @@ public class ExpenseController {
         LocalDate startDate = LocalDate.parse(start);
         LocalDate endDate = LocalDate.parse(end);
                 
-        return expenseService.getExpensesByDateRange(startDate, endDate, getUserIdForRequest(authHeader));
+        return expenseService.getExpensesByDateRange(startDate, endDate, AuthTokenUtil.getUserIdFromHeader(authHeader));
                 
             }
     

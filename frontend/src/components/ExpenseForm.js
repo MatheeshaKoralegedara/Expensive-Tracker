@@ -51,7 +51,7 @@ function ExpenseForm({ onAdd, selectedExpense, onCancel }) {
     <div className="glass" style={{ padding:'32px 28px', maxWidth:520 }}>
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:28 }}>
         <h2 style={{ margin:0, fontSize:20, fontWeight:700 }}>
-          {selectedExpense ? '✏️ Edit Expense' : '+ New Expense'}
+          {selectedExpense ? 'Edit Expense' : '+ New Expense'}
         </h2>
         {selectedExpense && onCancel && (
           <button onClick={onCancel} style={{ background:'none', border:'none', color:'var(--text-muted)', cursor:'pointer', fontSize:22, lineHeight:1 }}>×</button>
@@ -60,7 +60,7 @@ function ExpenseForm({ onAdd, selectedExpense, onCancel }) {
 
       {success && (
         <div style={{ background:'rgba(67,233,123,0.1)', border:'1px solid rgba(67,233,123,0.25)', borderRadius:10, padding:'10px 14px', fontSize:13, color:'var(--green)', marginBottom:20 }}>
-          ✓ {selectedExpense ? 'Expense updated!' : 'Expense added!'}
+          {selectedExpense ? 'Expense updated!' : 'Expense added!'}
         </div>
       )}
 
@@ -90,7 +90,7 @@ function ExpenseForm({ onAdd, selectedExpense, onCancel }) {
           <input className="input-field" type="date" value={date} onChange={e => setDate(e.target.value)} required />
         </div>
         <button className="btn-primary" type="submit" disabled={loading} style={{ marginTop:4, opacity:loading?0.7:1 }}>
-          {loading ? 'Saving...' : selectedExpense ? 'Update Expense' : 'Add Expense →'}
+          {loading ? 'Saving...' : selectedExpense ? 'Update Expense' : 'Add Expense'}
         </button>
       </form>
     </div>
