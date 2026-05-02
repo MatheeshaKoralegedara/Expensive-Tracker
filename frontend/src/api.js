@@ -1,7 +1,21 @@
 import axios from "axios";
 
+const getDefaultApiUrl = () => {
+    if (typeof window === "undefined") {
+        return "http://localhost:8080/api";
+    }
+
+    const { protocol, hostname } = window.location;
+
+    if (hostname && hostname !== "localhost" && hostname !== "127.0.0.1") {
+        return `${protocol}//${hostname}:8080/api`;
+    }
+
+    return "http://localhost:8080/api";
+};
+
 const api = axios.create({
-    baseURL: process.env.REACT_APP_API_URL || "http://localhost:8080/api"
+    baseURL: process.env.REACT_APP_API_URL || getDefaultApiUrl()
 });
 
 api.interceptors.request.use((config) => {

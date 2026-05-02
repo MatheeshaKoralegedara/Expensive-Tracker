@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import spendwiseLogo from '../assets/spendwise-logo.png';
+import api from '../api';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -135,7 +135,7 @@ function Register() {
     setSuccessMessage('');
 
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/register', {
+      const response = await api.post('/auth/register', {
         username: formData.username,
         email: formData.email,
         firstName: formData.firstName,

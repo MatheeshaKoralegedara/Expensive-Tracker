@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import api from '../api';
 
 function VerifyEmail() {
   const [searchParams] = useSearchParams();
@@ -19,7 +19,7 @@ function VerifyEmail() {
       }
 
       try {
-        const response = await axios.post('http://localhost:8080/api/auth/verify-email', null, {
+        const response = await api.post('/auth/verify-email', null, {
           params: { token }
         });
         
