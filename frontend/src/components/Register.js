@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import spendwiseLogo from '../assets/spendwise-logo.png';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -184,9 +185,9 @@ function Register() {
 
       <div className="fade-up" style={{ width:'100%', maxWidth:500, padding:'0 24px' }}>
         <div style={{ textAlign:'center', marginBottom:40 }}>
-          <div style={{ width:60, height:60, borderRadius:18, background:'linear-gradient(135deg, var(--accent-3), #38ef7d)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:28, margin:'0 auto 16px', boxShadow:'0 8px 32px rgba(67,233,123,0.3)' }}>✨</div>
-          <h1 style={{ fontSize:28, fontWeight:800, color:'var(--text)', margin:0 }}>SpendWise</h1>
-          <p style={{ color:'var(--text-muted)', marginTop:6, fontSize:14 }}>Create your account and start tracking expenses</p>
+          <img className="auth-logo" src={spendwiseLogo} alt="SpendWise logo" />
+          
+          <p style={{ color:'var(--text-muted)', marginTop:1, fontSize:14 }}>Create your account and start tracking expenses</p>
         </div>
 
         <div style={{ background:'var(--surface)', border:'1px solid var(--border)', borderRadius:24, padding:'36px 32px' }}>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api";
+import spendwiseLogo from "../assets/spendwise-logo.png";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -46,25 +47,10 @@ function Login() {
       padding: 24,
     }}>
       <div className="fade-up" style={{ width: "100%", maxWidth: 420 }}>
-        <div style={{ textAlign: "center", marginBottom: 40 }}>
-          <div style={{
-            width: 60,
-            height: 60,
-            borderRadius: 18,
-            background: "var(--accent)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: 18,
-            fontWeight: 800,
-            color: "#fff",
-            margin: "0 auto 16px",
-            boxShadow: "0 8px 32px rgba(108,99,255,0.35)",
-          }}>
-            SW
-          </div>
-          <h1 style={{ fontSize: 28, fontWeight: 800, color: "var(--text)", margin: 0 }}>SpendWise</h1>
-          <p style={{ color: "var(--text-muted)", marginTop: 6, fontSize: 14 }}>Track every rupee, own your future</p>
+        <div style={{ textAlign: "center", marginBottom: 20 }}>
+          <img className="auth-logo" src={spendwiseLogo} alt="SpendWise logo" />
+          
+          <p style={{ color: "var(--text-muted)", marginTop: 1, fontSize: 14 }}>Track every rupee, own your future</p>
         </div>
 
         <div style={{

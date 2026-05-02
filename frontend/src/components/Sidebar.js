@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import spendwiseLogo from "../assets/spendwise-logo.png";
 
 const navItems = [
   { path: "/dashboard", icon: "D", label: "Dashboard" },
@@ -22,8 +23,10 @@ function Sidebar() {
   return (
     <aside className="sidebar">
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 36, paddingLeft: 4 }}>
-        <div className="brand-mark">SW</div>
-        <span style={{ fontFamily: "Syne, sans-serif", fontWeight: 800, fontSize: 18, color: "var(--text)" }}>
+        <div className="brand-mark">
+          <img src={spendwiseLogo} alt="SpendWise logo" />
+        </div>
+        <span style={{ fontFamily: "Syne, sans-serif", fontWeight: 800, fontSize: 16, color: "var(--text)" }}>
           SpendWise
         </span>
       </div>
