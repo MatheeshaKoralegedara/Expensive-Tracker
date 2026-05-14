@@ -1,22 +1,23 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Footer from './Footer';
 
 function Goodbye() {
   const navigate = useNavigate();
-
   useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate("/"); // Redirect to login after 2s
-    }, 2000);
-
+    const timer = setTimeout(() => navigate('/'), 2200);
     return () => clearTimeout(timer);
   }, [navigate]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-400 to-red-500">
-      <h1 className="text-4xl font-bold text-white animate-pulse">
-        👋 See you next time!
-      </h1>
+    <div style={{ minHeight:'100vh', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', background:'var(--bg)' }}>
+      <div className="fade-up" style={{ textAlign:'center' }}>
+        <div style={{ fontSize:64, marginBottom:24 }}>👋</div>
+        <h1 style={{ fontSize:36, fontWeight:800, color:'var(--text)', margin:'0 0 12px' }}>See you next time!</h1>
+        <p style={{ color:'var(--text-muted)', fontSize:14 }}>Your financial data is safe and sound.</p>
+      </div>
+      <Footer />
     </div>
   );
 }
