@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Footer from './Footer';
 
 function Welcome() {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ function Welcome() {
         </div>
         <p style={{ color:'var(--text-muted)', marginTop:12, fontSize:13 }}>{progress}%</p>
       </div>
+      <Footer />
     </div>
   );
 }

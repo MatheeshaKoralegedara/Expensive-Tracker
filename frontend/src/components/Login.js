@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api";
 import spendwiseLogo from "../assets/spendwise-logo.png";
+import Footer from "./Footer";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -41,6 +42,7 @@ function Login() {
     <div style={{
       minHeight: "100vh",
       display: "flex",
+      flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
       background: "var(--bg)",
@@ -107,6 +109,7 @@ function Login() {
           </p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

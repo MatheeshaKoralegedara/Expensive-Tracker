@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import api from '../api';
+import Footer from './Footer';
 
 function VerifyEmail() {
   const [searchParams] = useSearchParams();
@@ -47,6 +48,7 @@ function VerifyEmail() {
     <div style={{
       minHeight: '100vh',
       display: 'flex',
+      flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
       background: 'var(--bg)',
@@ -195,6 +197,7 @@ function VerifyEmail() {
           }
         `}</style>
       </div>
+      <Footer />
     </div>
   );
 }

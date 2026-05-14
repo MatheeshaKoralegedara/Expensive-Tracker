@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import spendwiseLogo from '../assets/spendwise-logo.png';
 import api from '../api';
+import Footer from './Footer';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -177,7 +178,7 @@ function Register() {
 
   return (
     <div style={{
-      minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
+      minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
       background: 'var(--bg)', position: 'relative', overflow: 'hidden', paddingTop: 40, paddingBottom: 40
     }}>
       <div style={{ position:'absolute', width:500, height:500, borderRadius:'50%', background:'radial-gradient(circle, rgba(67,233,123,0.1) 0%, transparent 70%)', top:-100, right:-100, pointerEvents:'none' }} />
@@ -372,6 +373,7 @@ function Register() {
           </p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
