@@ -352,7 +352,10 @@ function Register() {
                 required
               />
               <label style={{ fontSize:12, color:'var(--text-muted)', cursor:'pointer' }}>
-                I agree to the <a href="#" style={{ color:'var(--accent)', textDecoration:'none' }}>Terms & Conditions</a> and <a href="#" style={{ color:'var(--accent)', textDecoration:'none' }}>Privacy Policy</a>
+                I agree to the{' '}
+                <button type="button" style={{ color:'var(--accent)', background:'none', border:0, padding:0, font:'inherit', cursor:'pointer' }}>Terms & Conditions</button>
+                {' '}and{' '}
+                <button type="button" style={{ color:'var(--accent)', background:'none', border:0, padding:0, font:'inherit', cursor:'pointer' }}>Privacy Policy</button>
               </label>
             </div>
             {errors.agreeToTerms && <div style={{ color:'var(--red)', fontSize:12 }}>{errors.agreeToTerms}</div>}
